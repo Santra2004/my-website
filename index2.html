@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Book | Sayantika Das </title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- 1. AESTHETIC SETTINGS --- */
+        :root {
+            --bg-paper: #fdfbf7;      /* Warm white/paper color */
+            --text-dark: #2a2a2a;     /* Soft black */
+            --accent-gold: #c5a47e;   /* Muted Gold */
+            --accent-sage: #8da399;   /* Muted Green (optional usage) */
+            --font-head: 'Playfair Display', serif;
+            --font-body: 'Lora', serif;
+        }
+
+        /* --- 2. RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-paper);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-head);
+            font-weight: 400;
+            color: var(--text-dark);
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        img { display: block; max-width: 100%; height: auto; }
+
+        /* --- 3. NAVIGATION --- */
+        nav {
+            padding: 2.5rem 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .brand {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .menu { display: flex; gap: 3rem; }
+        
+        .menu a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+        
+        .menu a:hover { opacity: 1; color: var(--accent-gold); }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-style: italic;
+            opacity: 0.8;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+
+        .btn-outline {
+            padding: 1rem 3rem;
+            border: 1px solid var(--text-dark);
+            text-transform: uppercase;
+            font-family: sans-serif; /* Contrast font for button */
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--text-dark);
+            color: var(--bg-paper);
+        }
+
+        /* --- 5. SPLIT SECTIONS (Used for Book & Author) --- */
+        .split-section {
+            padding: 8rem 10%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .text-side h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        /* Decorative line under headings */
+        .text-side h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 1px;
+            background: var(--accent-gold);
+            margin-top: 1rem;
+        }
+
+        .text-side p { margin-bottom: 1.5rem; opacity: 0.85; }
+
+        /* IMAGE STYLES */
+        .img-frame {
+            position: relative;
+        }
+
+        /* The floating effect for the book */
+        .book-shadow {
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.15);
+            transform: rotate(-2deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .book-shadow:hover { transform: rotate(0deg) scale(1.02); }
+
+        /* The classic frame for the author */
+        .author-frame {
+            border-radius: 200px 200px 0 0; /* Arch shape */
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .author-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- 6. DIVIDER / QUOTE --- */
+        .quote-divider {
+            background-color: #F2EFE9; /* Slightly darker paper tone */
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .quote-divider blockquote {
+            font-family: var(--font-head);
+            font-size: 2.2rem;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+        .quote-author {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-gold);
+        }
+
+        /* --- 7. CONTACT SECTION --- */
+        .contact-area {
+            padding: 8rem 1rem;
+            text-align: center;
+        }
+
+        .contact-area h2 { font-size: 3rem; margin-bottom: 1rem; }
+        .contact-area p { margin-bottom: 3rem; }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 1.8rem;
+        }
+        
+        .social-icons a:hover { color: var(--accent-gold); transform: translateY(-5px); }
+
+        /* --- 8. FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            font-size: 0.8rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            opacity: 0.5;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3.5rem; }
+            .split-section { grid-template-columns: 1fr; gap: 4rem; text-align: center; padding: 4rem 5%; }
+            .split-section.reverse { display: flex; flex-direction: column-reverse; } /* Puts image on top on mobile */
+            .text-side h2::after { margin: 1rem auto; } /* Centers the line */
+            nav { justify-content: center; }
+            .menu { display: none; } /* Hides menu on mobile for simplicity */
+        }
+    </style>
+</head>
+<body>
+
+    <nav data-aos="fade-down" data-aos-duration="1200">
+        <div class="brand">Sayantika Das</div>
+        <div class="menu">
+            <a href="#book">The Book</a>
+            <a href="#author">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div data-aos="fade-up" data-aos-duration="1500">
+            <p>The Highly Anticipated Debut</p>
+            <h1>WHERE FRIENDSHIP<br>TOOK US</h1>
+            <a href="#book" class="btn-outline">Start Reading</a>
+        </div>
+    </section>
+
+    <section id="book" class="split-section">
+        <div class="img-frame" data-aos="fade-right" data-aos-duration="1200">
+            <img src="book.jpg" alt="Book Cover" class="book-shadow">
+        </div>
+
+        <div class="text-side" data-aos="fade-left" data-aos-duration="1200">
+            <h2>The Synopsis</h2>
+            <p>
+                <strong>Every story has a beginning.</strong><br>
+              
+            </p>
+            <p>
+                
+            </p>
+            <br>
+            <a href="#" class="btn-outline" style="background: #2a2a2a; color: #fff;">Buy on Amazon</a>
+        </div>
+    </section>
+
+    <section class="quote-divider" data-aos="zoom-in">
+        <blockquote>
+            "A hauntingly beautiful narrative that stays with you long after the final page."
+        </blockquote>
+        <div class="quote-author">— The Literary Review</div>
+    </section>
+
+    <section id="author" class="split-section reverse">
+        <div class="text-side" data-aos="fade-right" data-aos-duration="1200">
+            <h2>The Author</h2>
+            <p>
+                Hello, I am <strong>Sayantika Das</strong>. I write stories for the dreamers and the wanderers.
+            </p>
+            <p>
+                
+            </p>
+        </div>
+
+        <div class="img-frame" data-aos="fade-left" data-aos-duration="1200">
+            <div class="author-frame">
+                <img src="author.jpg" alt="Author Portrait">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-area">
+        <div data-aos="fade-up">
+            <h2>Correspondence</h2>
+            <p>For inquiries, collaborations, or letters.</p>
+            <p style="font-size: 1.2rem; font-weight: bold;">dassayantika724@gmail.com</p>
+
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 Sayantika Das. Designed with care.
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 80,
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+    </script>
+</body>
+</html>
